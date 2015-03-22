@@ -19,7 +19,7 @@
                 .All()
                 .Where(x => x.CategoryId == id)
                 .Select(x => x.Questions);
-
+           
             return View(questionsById);
         }
     }

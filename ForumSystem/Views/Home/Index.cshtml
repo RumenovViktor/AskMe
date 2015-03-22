@@ -1,0 +1,16 @@
+﻿@model System.Collections.Generic.IList<ForumSystem.Models.Category>
+
+<div id="categories">
+    <ul class="list-group">
+        @foreach (var category in Model)
+        {
+            <li class="list-group-item">
+                <div class="count-box">
+                    <p class="count-value">@category.Questions.Count</p>
+                </div>
+                @Html.ActionLink(@category.CategoryName, "Index", "Category", new { id = category.CategoryId }, new { @class = "element-value" })
+            </li>
+        }
+    </ul>
+</div>
+

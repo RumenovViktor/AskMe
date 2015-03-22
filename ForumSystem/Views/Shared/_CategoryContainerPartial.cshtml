@@ -1,0 +1,13 @@
+﻿@model System.Collections.IList
+
+<div id="category-area">
+    <ul class="list-group list-group-custom">
+        @foreach (var category in (IList<ForumSystem.Models.Category>)Model)
+        {
+            <li class="list-group-item">
+                @Html.ActionLink(category.CategoryName, "Index", "Category", null, new { @class = "category-name", id = category.CategoryId })
+            </li>
+        }
+    </ul>
+</div>
+

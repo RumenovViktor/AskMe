@@ -1,0 +1,88 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+#icon {
+    width: 20px;
+    height: 20px;
+    top: 22px;
+    left: 85px;
+    position: absolute;
+
+}
+
+.list-group.list-group-custom {
+    width: 15%;
+    text-align: center;
+}
+
+#category-container {
+    
+}
+
+#category-area {
+    margin-top: 10%;
+}
+
+li{
+    list-style-type: none;
+}
+
+li:hover {
+    cursor: pointer;
+    border-right: 5px solid #2980b9;
+}
+
+.category-name, .category-name:hover {
+    text-decoration: none;
+}
+
+#registerLink, #loginLink, .navbar-brand.navbar-brand-custom.navbar-inverse, .navbar-inverse .navbar-brand.navbar-brand.navbar-brand-custom {
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top.navbar-custom {
+    height: 10%;
+    background-color: #2c3e50;
+}
+
+#categories {
+    margin-left: 200px;
+}
+
+.count-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    border: 1px solid #16a085;
+    box-shadow: 0px 0px 10px #16a085;
+    display: inline-block;
+    position: relative;
+}
+
+
+ul.list-group{
+    position: absolute;
+    width: 70%;
+}
+
+.list-group-item a.element-value {
+    top: 45px;
+    left: 140px;
+}
+
+.list-group-item a.element-value, p.count-value{
+    color: #2c3e50;
+    font-size: 18px;
+    display: inline-block;
+    position: absolute;
+
+}
+
+p.count-value {
+    margin-top: 29px;
+    margin-left: 34px;
+}

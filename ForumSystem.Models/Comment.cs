@@ -11,6 +11,10 @@
         [Required]
         public string CommentContent { get; set; }
 
+        public int QuestionId { get; set; }
+
+        public virtual Question Question { get; set; }
+
         public DateTime PostDate { get; set; }
     }
 }

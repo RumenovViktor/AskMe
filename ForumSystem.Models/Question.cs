@@ -17,6 +17,8 @@
         [Key]
         public int QuestionId { get; set; }
 
+        public string Title { get; set; }
+
         [Required]
         public string QuestionContent { get; set; }
 

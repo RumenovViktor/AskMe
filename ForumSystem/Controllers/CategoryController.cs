@@ -1,9 +1,10 @@
 ﻿namespace ForumSystem.Controllers
 {
     using System;
-    using System.Web.Mvc;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
 
     using ForumSystem.Models;
     using ForumSystem.Data.Repositories;
@@ -12,15 +13,42 @@
     {
         public ActionResult Index(int? id) 
         {
-            IRepository<Category> questions = new Repository<Category>();
+            IRepository<Category> categories = new Repository<Category>();
 
-            // Select all the questions that are in the wanted category
-            var questionsById = questions
+            // Select the category by id
+            var categoryById = categories
                 .All()
                 .Where(x => x.CategoryId == id)
-                .Select(x => x.Questions);
-           
-            return View(questionsById);
+                .FirstOrDefault();
+
+            // Select all the questions in the current directory
+            IList<Question> allQuestions = new List<Question>();
+            allQuestions = categoryById.Questions.ToList<Question>();
+
+            IList<QuestionViewModel> listWithQuestionsInCategory = new List<QuestionViewModel>();
+
+            for (int i = 0; i < allQuestions.Count; i++)
+            {
+                // Create view model with question
+                var currentCategoryQuestions = new QuestionViewModel 
+                {
+                    Title = allQuestions[i].Title,
+                    QuestionContent = allQuestions[i].QuestionContent,
+                    TimeOfCreation = allQuestions[i].TimeOfCreation,
+                    Answers = allQuestions[i].Answers
+                };
+
+                listWithQuestionsInCategory.Add(currentCategoryQuestions);
+
+            }
+
+            return View(listWithQuestionsInCategory);
+        }
+
+        [HttpPost]
+        public ActionResult PostQuestion(QuestionViewModel newQuestion)
+        {
+            return null;
         }
     }
 }

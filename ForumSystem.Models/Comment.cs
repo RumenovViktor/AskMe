@@ -11,9 +11,9 @@
         [Required]
         public string CommentContent { get; set; }
 
-        public int QuestionId { get; set; }
+        public int AnswerId { get; set; }
 
-        public virtual Question Question { get; set; }
+        public virtual Answer Answer { get; set; }
 
         public DateTime PostDate { get; set; }
     }

@@ -2,10 +2,15 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("PostQuestion", "Category", FormMethod.Post, new { @class = "form-control" }))
+    using (Html.BeginForm("PostQuestion", "Category", FormMethod.Post, new { }))
     {
-        Html.TextAreaFor(x => x.Title, new { @class = "question-title" });
-        <input type="submit" class="btn btn-default" />
+        <div class="form-group">
+            @Html.TextBoxFor(x => x.Title, new { @id = "question-title", @class = "form-control", @placeholder = "Question in few words..."})
+        </div>
+    <div class="form-group">
+        @Html.TextAreaFor(x => x.QuestionContent, new { @id = "question-content", @class = "form-control", @rows = "5", @placeholder = "More detailed explanation here..."})
+    </div>
+    <input type="submit" class="btn btn-primary" value="Post"/>
     }
 }
 

@@ -11,9 +11,14 @@
 
     public class CategoryController : Controller
     {
-        public ActionResult Index(int? id) 
+        public ActionResult Index(int? id)
         {
             IRepository<Category> categories = new Repository<Category>();
+
+            if (!TempData.ContainsKey("CategoryID"))
+            {
+                TempData.Add("CategoryID", id);
+            }
 
             // Select the category by id
             var categoryById = categories
@@ -30,11 +35,12 @@
             for (int i = 0; i < allQuestions.Count; i++)
             {
                 // Create view model with question
-                var currentCategoryQuestions = new QuestionViewModel 
+                var currentCategoryQuestions = new QuestionViewModel
                 {
                     Title = allQuestions[i].Title,
                     QuestionContent = allQuestions[i].QuestionContent,
                     TimeOfCreation = allQuestions[i].TimeOfCreation,
+                    CategoryId = allQuestions[i].CategoryId,
                     Answers = allQuestions[i].Answers
                 };
 
@@ -46,9 +52,19 @@
         }
 
         [HttpPost]
+        [ValidateInput(true)]
+        [ValidateAntiForgeryToken]
         public ActionResult PostQuestion(QuestionViewModel newQuestion)
         {
-            return null;
+            int categoryId = (int)TempData.Values.ElementAt(0);
+
+
+            if (ModelState.IsValid)
+            {
+                //TODO: Save to database
+            }
+
+            return RedirectToAction("Index", categoryId);
         }
     }
 }

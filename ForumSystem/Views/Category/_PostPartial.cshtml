@@ -2,15 +2,25 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("PostQuestion", "Category", FormMethod.Post, new { }))
+    using (Html.BeginForm("PostQuestion", "Category", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+    
+    @*
+        Another solution for passing the id is to pass it to the TempData/ViewBag and use it.
+        That's even easier to do then to pass object and int to a controller.
+    *@
+    
         <div class="form-group">
             @Html.TextBoxFor(x => x.Title, new { @id = "question-title", @class = "form-control", @placeholder = "Question in few words..."})
         </div>
-    <div class="form-group">
-        @Html.TextAreaFor(x => x.QuestionContent, new { @id = "question-content", @class = "form-control", @rows = "5", @placeholder = "More detailed explanation here..."})
-    </div>
-    <input type="submit" class="btn btn-primary" value="Post"/>
+        <div class="form-group">
+            @Html.TextAreaFor(x => x.QuestionContent, new { @id = "question-content", @class = "form-control", @rows = "5", @placeholder = "More detailed explanation here..."})
+        </div>
+        <input type="submit" class="btn btn-primary" value="Post" />
+        @Html.ActionLink("Post", "PostQuestion", "Category", new { }, new { @class = "btn btn-primary" })
+    
     }
 }
 

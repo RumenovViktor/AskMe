@@ -8,7 +8,6 @@
                 <div class="count-box">
                     <p class="count-value">@category.Questions.Count</p>
                 </div>
-                @Html.ActionLink(@category.CategoryName, "Index", "Category", new { id = category.CategoryId }, new { @class = "element-value" })
             </li>
         }
     </ul>

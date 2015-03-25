@@ -39,6 +39,10 @@ li:hover {
     text-decoration: none;
 }
 
+.question-name{
+    cursor: pointer;
+}
+
 #registerLink, #loginLink, .navbar-brand.navbar-brand-custom.navbar-inverse, .navbar-inverse .navbar-brand.navbar-brand.navbar-brand-custom {
     color: white;
     font-size: 18px;
@@ -110,6 +114,7 @@ p.count-value {
     color: #2c3e50;
 }
 
-.post-form {
+.post-form, #question-section {
     margin-left: 25%;
+    margin-top: 10%;
 }

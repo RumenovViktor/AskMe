@@ -5,7 +5,7 @@
     using (Html.BeginForm("PostQuestion", "Category", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary()
+        @Html.ValidationSummary(true)
     
     @*
         Another solution for passing the id is to pass it to the TempData/ViewBag and use it.
@@ -18,9 +18,7 @@
         <div class="form-group">
             @Html.TextAreaFor(x => x.QuestionContent, new { @id = "question-content", @class = "form-control", @rows = "5", @placeholder = "More detailed explanation here..."})
         </div>
-        <input type="submit" class="btn btn-primary" value="Post" />
-        @Html.ActionLink("Post", "PostQuestion", "Category", new { }, new { @class = "btn btn-primary" })
-    
+        <input type="submit" class="btn btn-primary" value="Post" />    
     }
 }
 

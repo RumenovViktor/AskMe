@@ -11,20 +11,27 @@
 
     public class CategoryController : Controller
     {
+        [NonAction]
+        private Category GetCategoryById(int? id, IRepository<Category> categories)
+        {
+            var categoryById = categories
+                .All()
+                .Where(x => x.CategoryId == id)
+                .FirstOrDefault();
+
+            return categoryById;
+        }
+
         public ActionResult Index(int? id)
         {
-            IRepository<Category> categories = new Repository<Category>();
-
             if (!TempData.ContainsKey("CategoryID"))
             {
                 TempData.Add("CategoryID", id);
             }
 
-            // Select the category by id
-            var categoryById = categories
-                .All()
-                .Where(x => x.CategoryId == id)
-                .FirstOrDefault();
+            IRepository<Category> categories = new Repository<Category>();
+
+            var categoryById = GetCategoryById(id, categories);
 
             // Select all the questions in the current directory
             IList<Question> allQuestions = new List<Question>();
@@ -56,15 +63,31 @@
         [ValidateAntiForgeryToken]
         public ActionResult PostQuestion(QuestionViewModel newQuestion)
         {
+            IRepository<Category> categories = new Repository<Category>();
+
             int categoryId = (int)TempData.Values.ElementAt(0);
 
+            //var errors = ModelState
+            //            .Where(x => x.Value.Errors.Count > 0)
+            //            .Select(x => new { x.Key, x.Value.Errors })
+            //            .ToArray();
 
             if (ModelState.IsValid)
             {
                 //TODO: Save to database
+                var categoryById = GetCategoryById(categoryId, categories);
+                categoryById.Questions.Add(new Question 
+                {
+                    Title = newQuestion.Title,
+                    QuestionContent = newQuestion.QuestionContent,
+                    TimeOfCreation = DateTime.Now,
+                    CategoryId = categoryId                    
+                });
+
+                categories.SaveChanges();
             }
 
-            return RedirectToAction("Index", categoryId);
+            return RedirectToAction("Index", new { id = categoryId });
         }
     }
 }

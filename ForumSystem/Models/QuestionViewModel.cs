@@ -16,11 +16,11 @@
         }
 
         [Required]
-        [Range(1, 100, ErrorMessage = "The question field should not be empty.")]
+        //[Range(1, 100, ErrorMessage = "The question field should not be empty.")]
         public string Title { get; set; }
 
         [Required]
-        [Range(1, 500, ErrorMessage = "The description field should not be empty.")]
+        //[Range(1, 500, ErrorMessage = "The description field should not be empty.")]
         public string QuestionContent { get; set; }
 
         public int CategoryId { get; set; }

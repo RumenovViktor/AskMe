@@ -43,7 +43,15 @@ li:hover {
     cursor: pointer;
 }
 
-#registerLink, #loginLink, .navbar-brand.navbar-brand-custom.navbar-inverse, .navbar-inverse .navbar-brand.navbar-brand.navbar-brand-custom {
+#question-content {
+    resize: none;
+}
+
+.question-box {
+    width: 90%;
+}
+
+#registerLink, #loginLink, .navbar-brand.navbar-brand-custom.navbar-inverse, .navbar-inverse .navbar-brand.navbar-brand.navbar-brand-custom, #profile-manage, #log-off {
     color: white;
     font-size: 18px;
     margin-top: 10px;

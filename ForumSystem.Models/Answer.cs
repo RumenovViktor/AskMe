@@ -16,9 +16,14 @@
         [Key]
         public int AnswerId { get; set; }
 
+        [Required]
         public string Content { get; set; }
 
         public DateTime PostDate { get; set; }
+
+        public Guid UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         public ICollection<Comment> Comments 
         {

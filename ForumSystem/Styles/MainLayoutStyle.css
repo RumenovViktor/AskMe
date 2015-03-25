@@ -118,3 +118,23 @@ p.count-value {
     margin-left: 25%;
     margin-top: 10%;
 }
+
+#register-form {
+    width: 60%;
+    float: left;
+}
+
+#register-greeting {
+    float: right;
+    margin-right: 10%;
+}
+
+#register-greeting, #register-form {
+    margin-top: 15%;
+}
+
+#profile-container {
+    margin-top: 7%;
+    margin-left: -9%;
+    position: relative;
+}

@@ -189,6 +189,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\220px-Question_mark_grey.svg.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\images.png" />
+    <Content Include="fonts\say-clipart-11971028791107470649fundraw_dot_com_cartoon_kid-svg-hi.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

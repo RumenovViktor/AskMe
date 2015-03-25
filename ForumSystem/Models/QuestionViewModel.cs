@@ -25,6 +25,8 @@
 
         public int CategoryId { get; set; }
 
+        public string UserId { get; set; }
+
         public DateTime TimeOfCreation { get; set; }
 
         public virtual ICollection<Answer> Answers 

@@ -20,9 +20,6 @@
             this.answers = new HashSet<Answer>();
         }
 
-        [Required]
-        public override string UserName { get; set; }
-
         public byte[] Image { get; set; }
 
         public virtual ICollection<Question> Questions 

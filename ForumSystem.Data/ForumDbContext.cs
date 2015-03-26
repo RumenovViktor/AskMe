@@ -9,9 +9,10 @@
     using ForumSystem.Data.Interfaces;
     using ForumSystem.Data.Migrations;
 
-    public class ForumDbContext : IdentityDbContext<User>, IForumDbContext
+    public class ForumDbContext : IdentityDbContext<IdentityUser>, IForumDbContext
     {
-        public ForumDbContext() : base("ForumDB")
+        public ForumDbContext() 
+            : base("ForumDB")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ForumDbContext, Configuration>());
         }

@@ -40,7 +40,7 @@
         public User GetUserById(string userId)
         {
             IRepository<User> users = new Repository<User>();
-            var user = users.All().Where(x => x.Id == userId).FirstOrDefault();
+            var user = users.All().FirstOrDefault(x => x.Id == userId);
 
             return user;
         }
@@ -121,6 +121,7 @@
                     CategoryId = categoryId,
                     UserId = User.Identity.GetUserId(), // Get the current user
                     User = GetUserById(User.Identity.GetUserId())
+                    
                 });
 
                 categories.SaveChanges();

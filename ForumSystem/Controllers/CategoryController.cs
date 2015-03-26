@@ -31,6 +31,20 @@
             return categoryById;
         }
 
+        /// <summary>
+        /// Get the user with the passed id.
+        /// </summary>
+        /// <param name="userId">Identifier of the wanted user.</param>
+        /// <returns>The user with the passed id</returns>
+        [NonAction]
+        public User GetUserById(string userId)
+        {
+            IRepository<User> users = new Repository<User>();
+            var user = users.All().Where(x => x.Id == userId).FirstOrDefault();
+
+            return user;
+        }
+
         public ActionResult Index(int? id)
         {
             // If the id is not passed in the TempData - pass it, if so - skip it.
@@ -61,7 +75,8 @@
                     TimeOfCreation = allQuestions[i].TimeOfCreation,
                     CategoryId = allQuestions[i].CategoryId,
                     Answers = allQuestions[i].Answers,
-                    UserId = User.Identity.GetUserId() // Get the current user
+                    UserId = allQuestions[i].UserId, // Get the current user id
+                    User = allQuestions[i].User
                 };
 
                 listWithQuestionsInCategory.Add(currentCategoryQuestions);
@@ -69,8 +84,16 @@
             }
 
             return View(listWithQuestionsInCategory);
-        }
+        } 
 
+        /// <summary>
+        /// The current user posts a new question.
+        /// </summary>
+        /// <param name="newQuestion">
+        /// The needed information to create a new Question. The object is populated by the strings that are typed in the 
+        /// textboxes and textfields.
+        /// </param>
+        /// <returns>Redirects to "Index" where the new question in fetched and displayed on the page.</returns>
         [HttpPost]
         [ValidateInput(true)]
         [ValidateAntiForgeryToken]
@@ -87,15 +110,17 @@
 
             if (ModelState.IsValid)
             {
-                // Save to database
                 var categoryById = GetCategoryById(categoryId, categories);
+
+                // Save to database
                 categoryById.Questions.Add(new Question 
                 {
                     Title = newQuestion.Title,
                     QuestionContent = newQuestion.QuestionContent,
                     TimeOfCreation = DateTime.Now,
                     CategoryId = categoryId,
-                    UserId = User.Identity.GetUserId() // Get the current user
+                    UserId = User.Identity.GetUserId(), // Get the current user
+                    User = GetUserById(User.Identity.GetUserId())
                 });
 
                 categories.SaveChanges();

@@ -27,6 +27,8 @@
 
         public string UserId { get; set; }
 
+        public User User { get; set; }
+
         public DateTime TimeOfCreation { get; set; }
 
         public virtual ICollection<Answer> Answers 

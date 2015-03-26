@@ -108,6 +108,7 @@ p.count-value {
 
 .post-form {
     margin-top: 10%;
+    position: relative;
 }
 
 #question-title {
@@ -145,4 +146,22 @@ p.count-value {
     margin-top: 7%;
     margin-left: -9%;
     position: relative;
+}
+
+#new-question {
+    border: 1px solid #ccc;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top:5%;
+    padding-bottom: 5%;
+}
+
+.image-holder{
+    border:1px solid #ccc;
+    border-radius: 100px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 30%;
+    left: 1.5%;
 }

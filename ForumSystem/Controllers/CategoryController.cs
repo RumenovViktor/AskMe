@@ -45,6 +45,21 @@
             return user;
         }
 
+        [NonAction]
+        private QuestionViewModel CreateNewQuestionViewModel(Question question)
+        {
+            return new QuestionViewModel
+            {
+                Title = question.Title,
+                QuestionContent = question.QuestionContent,
+                TimeOfCreation = question.TimeOfCreation,
+                CategoryId = question.CategoryId,
+                Answers = question.Answers,
+                UserId = question.UserId, // Get the current user id
+                User = question.User
+            };
+        }
+
         public ActionResult Index(int? id)
         {
             IRepository<Category> categories = new Repository<Category>();
@@ -73,19 +88,8 @@
             for (int i = 0; i < allQuestions.Count; i++)
             {
                 // Create view model with question
-                var currentCategoryQuestions = new QuestionViewModel
-                {
-                    Title = allQuestions[i].Title,
-                    QuestionContent = allQuestions[i].QuestionContent,
-                    TimeOfCreation = allQuestions[i].TimeOfCreation,
-                    CategoryId = allQuestions[i].CategoryId,
-                    Answers = allQuestions[i].Answers,
-                    UserId = allQuestions[i].UserId, // Get the current user id
-                    User = allQuestions[i].User
-                };
-
+                var currentCategoryQuestions = CreateNewQuestionViewModel(allQuestions[i]);
                 listWithQuestionsInCategory.Add(currentCategoryQuestions);
-
             }
 
             return View(listWithQuestionsInCategory);
@@ -105,20 +109,14 @@
         public ActionResult PostQuestion(QuestionViewModel newQuestion)
         {
             int categoryId = (int)TempData.Values.ElementAt(0);
-
-            //var errors = ModelState
-            //            .Where(x => x.Value.Errors.Count > 0)
-            //            .Select(x => new { x.Key, x.Value.Errors })
-            //            .ToArray();
-
             if (ModelState.IsValid)
             {
                 IRepository<Category> categories = new Repository<Category>();
 
                 var categoryById = GetCategoryById(categoryId, categories);
                 string userId = User.Identity.GetUserId();
-                // Save to database
-                categoryById.Questions.Add(new Question 
+
+                Question questionToBeAdded = new Question
                 {
                     Title = newQuestion.Title,
                     QuestionContent = newQuestion.QuestionContent,
@@ -126,8 +124,10 @@
                     CategoryId = categoryId,
                     Category = categoryById,
                     UserId = userId, // Get the current user                    
-                });
+                };
 
+                // Save to database
+                categoryById.Questions.Add(questionToBeAdded);
                 categories.SaveChanges();
             }
 

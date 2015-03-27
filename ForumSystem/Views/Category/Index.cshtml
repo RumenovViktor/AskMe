@@ -19,7 +19,7 @@
                 <div class="count-box category-count-box">
                     <p class="count-value">@Model[i].Answers.Count</p>
                 </div>
-                <a class="element-value question-name">@Model[i].Title</a>
+                @Html.ActionLink(@Model[i].Title, "Index", "Question", new { id = Model[i].QuestionId }, new { @class = "element-value question-name" })
                 <div class="post-profile">
                     @if(Model[i].User.Image == null)
                     {

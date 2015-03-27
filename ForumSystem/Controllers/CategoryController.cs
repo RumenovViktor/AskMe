@@ -50,6 +50,7 @@
         {
             return new QuestionViewModel
             {
+                QuestionId = question.QuestionId,
                 Title = question.Title,
                 QuestionContent = question.QuestionContent,
                 TimeOfCreation = question.TimeOfCreation,

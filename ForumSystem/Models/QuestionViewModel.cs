@@ -15,6 +15,8 @@
             this.answers = new HashSet<Answer>();
         }
 
+        public int QuestionId { get; set; }
+
         [Required]
         //[Range(1, 100, ErrorMessage = "The question field should not be empty.")]
         public string Title { get; set; }

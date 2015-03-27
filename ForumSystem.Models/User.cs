@@ -20,7 +20,7 @@
             this.answers = new HashSet<Answer>();
         }
 
-        public byte[] Image { get; set; }
+        public virtual byte[] Image { get; set; }
 
         public virtual ICollection<Question> Questions 
         {

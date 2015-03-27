@@ -13,7 +13,10 @@
     using ForumSystem.Data.Repositories;
 
     public class CategoryController : Controller
-    { 
+    {
+        private IRepository<User> users = new Repository<User>();
+        private IRepository<Category> categories = new Repository<Category>();
+
         /// <summary>
         /// Queries the Category table and returns the category with the wanted id.
         /// </summary>
@@ -21,7 +24,7 @@
         /// <param name="categories">Category repository.</param>
         /// <returns>Return the category with the wanted id.</returns>
         [NonAction]
-        private Category GetCategoryById(int? id, IRepository<Category> categories)
+        private Category GetCategoryById(int? id)
         {
             var categoryById = categories
                 .All()
@@ -39,10 +42,24 @@
         [NonAction]
         public User GetUserById(string userId)
         {
-            IRepository<User> users = new Repository<User>();
-            var user = users.All().FirstOrDefault(x => x.Id == userId);
+            var user = users.All().Where(x => x.Id == userId).FirstOrDefault();
 
             return user;
+        }
+
+        [NonAction]
+        private QuestionViewModel CreateNewQuestion(Question newQuestion)
+        {
+            return new QuestionViewModel
+            {
+                Title = newQuestion.Title,
+                QuestionContent = newQuestion.QuestionContent,
+                TimeOfCreation = newQuestion.TimeOfCreation,
+                CategoryId = newQuestion.CategoryId,
+                Answers = newQuestion.Answers,
+                UserId = newQuestion.UserId, // Get the current user id
+                User = newQuestion.User
+            };
         }
 
         public ActionResult Index(int? id)
@@ -55,9 +72,8 @@
                 TempData.Add("CategoryID", id);
             }
 
-            IRepository<Category> categories = new Repository<Category>();
-
-            var categoryById = GetCategoryById(id, categories);
+            ViewBag.CurrentUser = GetUserById(User.Identity.GetUserId());
+            var categoryById = GetCategoryById(id);
 
             // Select all the questions in the current directory
             IList<Question> allQuestions = new List<Question>();
@@ -68,18 +84,9 @@
             for (int i = 0; i < allQuestions.Count; i++)
             {
                 // Create view model with question
-                var currentCategoryQuestions = new QuestionViewModel
-                {
-                    Title = allQuestions[i].Title,
-                    QuestionContent = allQuestions[i].QuestionContent,
-                    TimeOfCreation = allQuestions[i].TimeOfCreation,
-                    CategoryId = allQuestions[i].CategoryId,
-                    Answers = allQuestions[i].Answers,
-                    UserId = allQuestions[i].UserId, // Get the current user id
-                    User = allQuestions[i].User
-                };
+                var currentCategoryQuestion = CreateNewQuestion(allQuestions[i]);
 
-                listWithQuestionsInCategory.Add(currentCategoryQuestions);
+                listWithQuestionsInCategory.Add(currentCategoryQuestion);
 
             }
 
@@ -103,26 +110,22 @@
 
             int categoryId = (int)TempData.Values.ElementAt(0);
 
-            //var errors = ModelState
-            //            .Where(x => x.Value.Errors.Count > 0)
-            //            .Select(x => new { x.Key, x.Value.Errors })
-            //            .ToArray();
-
             if (ModelState.IsValid)
             {
-                var categoryById = GetCategoryById(categoryId, categories);
-
-                // Save to database
-                categoryById.Questions.Add(new Question 
+                var categoryById = GetCategoryById(categoryId);
+                string userId = User.Identity.GetUserId();
+                Question questionToBeAdded = new Question 
                 {
                     Title = newQuestion.Title,
                     QuestionContent = newQuestion.QuestionContent,
                     TimeOfCreation = DateTime.Now,
                     CategoryId = categoryId,
-                    UserId = User.Identity.GetUserId(), // Get the current user
-                    User = GetUserById(User.Identity.GetUserId())
-                    
-                });
+                    Category = categoryById,
+                    UserId = userId, // Get the current user
+                };
+
+                // Save to database
+                categoryById.Questions.Add(questionToBeAdded);
 
                 categories.SaveChanges();
             }

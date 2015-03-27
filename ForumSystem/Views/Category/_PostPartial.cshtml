@@ -8,14 +8,14 @@
         @Html.ValidationSummary(true)
         
         <div class="image-holder">
-          @*@if(Model.User.Image == null)
+            @if (ViewBag.CurrentUser.Image == null)
             {
-                <img src="~/fonts/images.png" />
+                <img src="~/fonts/no_user_photo.png" />
             }
             else
             {
 
-            } *@
+            }
         </div>
         <div id="new-question">
             <div class="form-group">

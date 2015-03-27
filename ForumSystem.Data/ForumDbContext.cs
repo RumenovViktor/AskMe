@@ -9,7 +9,7 @@
     using ForumSystem.Data.Interfaces;
     using ForumSystem.Data.Migrations;
 
-    public class ForumDbContext : IdentityDbContext<IdentityUser>, IForumDbContext
+    public class ForumDbContext : IdentityDbContext<User>, IForumDbContext
     {
         public ForumDbContext() 
             : base("ForumDB")

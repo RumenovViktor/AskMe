@@ -159,9 +159,18 @@ p.count-value {
 .image-holder{
     border:1px solid #ccc;
     border-radius: 100px;
-    width: 100px;
-    height: 100px;
     position: absolute;
-    top: 30%;
-    left: 1.5%;
+    top: 36%;
+    left: 2.8%;
+}
+
+.image-holder > img{
+    width: 80px;
+	height: 80px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }

@@ -21,9 +21,13 @@
 
         public DateTime PostDate { get; set; }
 
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         public virtual User User { get; set; }
+
+        public int QuestionId { get; set; }
+
+        public Question Question { get; set; }
 
         public ICollection<Comment> Comments 
         {

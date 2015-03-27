@@ -28,6 +28,22 @@
             return user;
         }
 
+        [NonAction]
+        private AnswerViewModel CreateNewQuestionViewModel(Answer answer)
+        {
+            return new AnswerViewModel
+            {
+                AnswerId = answer.AnswerId,
+                Content = answer.Content,
+                PostDate = answer.PostDate,
+                QuestionId = answer.QuestionId,
+                Question = answer.Question,
+                UserId = answer.UserId,
+                User = answer.User,
+                Comments = answer.Comments,
+            };
+        }
+
         public ActionResult Index(int? id)
         {
             // Save the id so that we can pass it to other actions.
@@ -47,10 +63,14 @@
             var questionById = questions.All().Where(x => x.QuestionId == id).FirstOrDefault();
 
             IList<Answer> allAnswers = new List<Answer>();
+            allAnswers = questionById.Answers.ToList<Answer>();
 
-            for (int i = 0; i < questionById.Answers.Count; i++)
+            IList<AnswerViewModel> answersToBePosted = new List<AnswerViewModel>();
+
+            for (int i = 0; i < allAnswers.Count; i++)
             {
-                // TODO: Add all answers to the list so it can be sent to the view.
+                AnswerViewModel answerToBeAdded = CreateNewQuestionViewModel(allAnswers[i]);
+                answersToBePosted.Add(answerToBeAdded);
             }
 
             return View();

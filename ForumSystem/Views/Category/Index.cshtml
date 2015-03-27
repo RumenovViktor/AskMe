@@ -15,12 +15,29 @@
         <ul class="list-group">
             @for (int i = 0; i < Model.Count; i++)
             {
-            <li class="list-group-item question-box">
-                
-                <div class="count-box">
+            <li class="list-group-item question-box"> 
+                <div class="count-box category-count-box">
                     <p class="count-value">@Model[i].Answers.Count</p>
                 </div>
                 <a class="element-value question-name">@Model[i].Title</a>
+                <div class="post-profile">
+                    @if(Model[i].User.Image == null)
+                    {
+                        <img src="~/fonts/no_user_photo.png" />
+                    }
+                    else
+                    { 
+                    
+                    }
+                    <p class="user-name">@Model[i].User.UserName</p>
+                </div>
+                <ul class="date-time">
+                    <li class="day time">@Model[i].TimeOfCreation.Day<span>/</span></li>
+                    <li class="month time">@Model[i].TimeOfCreation.Month<span>/</span></li>
+                    <li class="year time">@Model[i].TimeOfCreation.Year <span>|</span></li>
+                    <li class="hour time">@Model[i].TimeOfCreation.Hour<span>:</span></li>
+                    <li class="minutes time">@Model[i].TimeOfCreation.Minute</li>
+                </ul>
             </li>
             }
         </ul>

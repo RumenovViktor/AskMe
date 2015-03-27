@@ -74,9 +74,13 @@ li:hover {
     border: 1px solid #16a085;
     box-shadow: 0px 0px 10px #16a085;
     display: inline-block;
+    margin-top: 2%;
     position: relative;
 }
 
+.count-box.category-count-box {
+    margin-top: 5%;
+}
 
 ul.list-group{
     position: absolute;
@@ -84,8 +88,12 @@ ul.list-group{
 }
 
 .list-group-item a.element-value {
-    top: 45px;
+    top: 60px;
     left: 140px;
+}
+
+a.element-value.question-name {
+    top: 70px;
 }
 
 .list-group-item a.element-value, p.count-value{
@@ -164,13 +172,44 @@ p.count-value {
     left: 2.8%;
 }
 
-.image-holder > img{
+.image-holder > img {
     width: 80px;
 	height: 80px;
+}
+
+.image-holder > img, .post-profile > img{
 	border-radius: 150px;
 	-webkit-border-radius: 150px;
 	-moz-border-radius: 150px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+.post-profile > img {
+    width: 40px;
+	height: 40px;
+    float: left;
+}
+
+ul.date-time {
+    margin-left: 78%;
+    margin-bottom: 2%;
+}
+
+ul.date-time li.time {
+    display: inline;
+}
+
+.post-profile {
+    margin-left: 14.5%;
+    position: absolute;
+    bottom: 15%;
+    float: left;
+}
+
+p.user-name {
+    position: absolute;
+    left: 125%;
+    top: 20%;
 }

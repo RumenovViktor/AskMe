@@ -124,7 +124,7 @@
                     TimeOfCreation = DateTime.Now,
                     CategoryId = categoryId,
                     Category = categoryById,
-                    UserId = userId, // Get the current user                    
+                    UserId = userId,// Get the current user                    
                 };
 
                 // Save to database

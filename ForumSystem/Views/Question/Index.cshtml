@@ -1,7 +1,45 @@
 ﻿@model IList<ForumSystem.Models.AnswerViewModel>
 
-@{
-    // TODO: Render partial view for posting answer if the user is logged.
+<div class="post-form form-group">
+    @{
+        Html.RenderPartial("_PostAnswerPartial", new ForumSystem.Models.AnswerViewModel());
+    }
+</div>
+@if (Model.Count > 0)
+{
+    <div id="question-section">
+        <ul class="list-group">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <li class="list-group-item question-box">
+                    <div class="profile-answer-img">
+                        @if (Model[i].User.Image == null)
+                        {
+                            <img src="~/fonts/no_user_photo.png" />
+                        }
+                        else
+                        {
+
+                        }
+                    </div>
+                    <div class="answer-content">
+                        <p>@Model[i].Content</p>
+                    </div>
+                    <ul class="date-time answer-time">
+                        <li class="day time">@Model[i].PostDate.Day<span>/</span></li>
+                        <li class="month time">@Model[i].PostDate.Month<span>/</span></li>
+                        <li class="year time">@Model[i].PostDate.Year <span>|</span></li>
+                        <li class="hour time">@Model[i].PostDate.Hour<span>:</span></li>
+                        <li class="minutes time">@Model[i].PostDate.Minute</li>
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <h1 class="no-answers">There are no answers for this question!</h1>
 }
 
 @*

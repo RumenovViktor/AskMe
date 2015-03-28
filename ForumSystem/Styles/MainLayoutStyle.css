@@ -109,7 +109,7 @@ p.count-value {
     margin-left: 34px;
 }
 
-.no-questions {
+.no-questions, .no-answers {
     margin-top: 10%;
     margin-left: 35%;
 }
@@ -156,7 +156,7 @@ p.count-value {
     position: relative;
 }
 
-#new-question {
+.new-post{
     border: 1px solid #ccc;
     padding-left: 15%;
     padding-right: 15%;
@@ -177,7 +177,7 @@ p.count-value {
 	height: 80px;
 }
 
-.image-holder > img, .post-profile > img{
+.image-holder > img, .post-profile > img, .profile-answer-img > img{
 	border-radius: 150px;
 	-webkit-border-radius: 150px;
 	-moz-border-radius: 150px;
@@ -212,4 +212,28 @@ p.user-name {
     position: absolute;
     left: 125%;
     top: 20%;
+}
+
+.image-holder-answer{
+    margin-top: 1.5%;
+}
+
+#title {
+    padding-bottom: 2%;
+}
+
+.profile-answer-img {
+    float: left;
+    margin-top: 3.7%;
+}
+
+.profile-answer-img > img {
+    width: 40px;
+    height: 40px;
+}
+
+.answer-content p {
+    margin-left: 10%;
+    margin-top: 5%;
+    word-wrap: break-word;
 }

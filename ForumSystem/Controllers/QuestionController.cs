@@ -15,6 +15,16 @@
     {
         private IRepository<User> users = new Repository<User>();
 
+        public Question GetQuestionById(int? id, IRepository<Question> questions)
+        {
+            var questionById = questions
+                .All()
+                .Where(x => x.QuestionId == id)
+                .FirstOrDefault();
+
+            return questionById;
+        }
+
         /// <summary>
         /// Get the user with the passed id.
         /// </summary>
@@ -58,9 +68,12 @@
 
             IRepository<Question> questions = new Repository<Question>();
 
+            var questionById = GetQuestionById(id, questions);
+
+
             // Get current user data.
             ViewBag.CurrentUser = GetUserById(User.Identity.GetUserId());
-            var questionById = questions.All().Where(x => x.QuestionId == id).FirstOrDefault();
+            ViewBag.Title = questionById.Title;
 
             IList<Answer> allAnswers = new List<Answer>();
             allAnswers = questionById.Answers.ToList<Answer>();
@@ -73,7 +86,36 @@
                 answersToBePosted.Add(answerToBeAdded);
             }
 
-            return View();
+            return View(answersToBePosted);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostAnswer(AnswerViewModel newAnswer) 
+        {
+            int questionId = (int)TempData.Values.ElementAt(0);
+
+            IRepository<Question> questions = new Repository<Question>();
+            var questionById = GetQuestionById(questionId, questions);
+            string userId = User.Identity.GetUserId();
+
+            if (ModelState.IsValid)
+            {
+                Answer answerToBePosted = new Answer
+                {
+                    Comments = newAnswer.Comments,
+                    Content = newAnswer.Content,
+                    PostDate = DateTime.Now,
+                    Question = questionById,
+                    QuestionId = questionId,
+                    UserId = userId,
+                };
+
+                questionById.Answers.Add(answerToBePosted);
+                questions.SaveChanges();
+            }
+
+            return RedirectToAction("Index", new { id = questionId });
         }
     }
 }

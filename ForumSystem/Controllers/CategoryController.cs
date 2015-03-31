@@ -66,8 +66,7 @@
             var categoryById = GetCategoryById(id, categories);
 
             // Select all the questions in the current directory
-            IList<Question> allQuestions = new List<Question>();
-            allQuestions = categoryById.Questions.ToList<Question>();
+            IList<Question> allQuestions = categoryById.Questions.ToList<Question>();
 
             IList<QuestionViewModel> listWithQuestionsInCategory = new List<QuestionViewModel>();
 
@@ -78,7 +77,7 @@
                 listWithQuestionsInCategory.Add(currentCategoryQuestions);
             }
 
-            return View(listWithQuestionsInCategory);
+            return View(listWithQuestionsInCategory.OrderByDescending(o => o.TimeOfCreation).ToList());
         } 
 
         /// <summary>

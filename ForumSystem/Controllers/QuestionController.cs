@@ -67,7 +67,8 @@
                 answersToBePosted.Add(answerToBeAdded);
             }
 
-            return View(answersToBePosted);
+            // Return all the answers sorted.
+            return View(answersToBePosted.OrderByDescending(o => o.PostDate).ToList());
         }
 
         [HttpPost]

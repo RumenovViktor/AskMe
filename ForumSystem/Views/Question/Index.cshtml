@@ -25,13 +25,43 @@
                     <div class="answer-content">
                         <p>@Model[i].Content</p>
                     </div>
-                    <ul class="date-time answer-time">
-                        <li class="day time">@Model[i].PostDate.Day<span>/</span></li>
-                        <li class="month time">@Model[i].PostDate.Month<span>/</span></li>
-                        <li class="year time">@Model[i].PostDate.Year <span>|</span></li>
-                        <li class="hour time">@Model[i].PostDate.Hour<span>:</span></li>
-                        <li class="minutes time">@Model[i].PostDate.Minute</li>
-                    </ul>
+                    <div class="answer-info">
+                        <div class="comments-section">
+                            <a class="all-comments" href="#">@Model[i].Comments.Count Comments</a>
+                            <a class="comment" href="#">Say something</a>
+                        </div>
+                        <ul class="date-time answer-time">
+                            <li class="day time">@Model[i].PostDate.Day<span>/</span></li>
+                            <li class="month time">@Model[i].PostDate.Month<span>/</span></li>
+                            <li class="year time">@Model[i].PostDate.Year <span>|</span></li>
+                            <li class="hour time">@Model[i].PostDate.Hour<span>:</span></li>
+                            <li class="minutes time">@Model[i].PostDate.Minute</li>
+                        </ul>
+                    </div>
+                    <div class="loaded-comments">
+                        @foreach (var comment in Model[i].Comments)
+                        {
+                            <div class="single-comment-space">
+                                @if (comment.User.Image == null)
+                                {
+                                    <img src="~/fonts/no_user_photo.png" />
+                                }
+                                else
+                                {
+
+                                }
+                                <p>@comment.User.UserName</p>
+                                <p>@comment.CommentContent</p>
+                                <ul class="date-time answer-time">
+                                    <li class="day time">@comment.PostDate.Day<span>/</span></li>
+                                    <li class="month time">@comment.PostDate.Month<span>/</span></li>
+                                    <li class="year time">@comment.PostDate.Year<span>|</span></li>
+                                    <li class="hour time">@comment.PostDate.Hour<span>:</span></li>
+                                    <li class="minutes time">@comment.PostDate.Minute</li>
+                                </ul>
+                            </div>
+                        }
+                    </div>
                 </li>
             }
         </ul>

@@ -5,30 +5,32 @@
 }
 
 <h1 id="title">@ViewBag.Title</h1>
+<input type="submit" id="open-post-form" class="btn" value="Answer"/>
 @if (User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("PostAnswer", "Question", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+    <div id="post">
+        @using (Html.BeginForm("PostAnswer", "Question", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-        <div class="image-holder image-holder-answer">
-            @if (currentUser.Image == null)
-            {
-                <img src="~/fonts/no_user_photo.png" />
-            }
-            else
-            {
+            <div class="image-holder image-holder-answer">
+                @if (currentUser.Image == null)
+                {
+                    <img src="~/fonts/no_user_photo.png" />
+                }
+                else
+                {
 
-            }
-        </div>
-        <div class="new-post">
-            <div id="answer-container" class="form-group">
-                @Html.TextAreaFor(x => x.Content,
-                    new { @id = "question-content", @class = "form-control", @rows = "5", @placeholder = "Answer this question..." })
+                }
             </div>
-            <input type="submit" class="btn btn-primary" value="Post" />
-        </div>
-    }
+            <div class="new-post">
+                <div id="answer-container" class="form-group">
+                    @Html.TextAreaFor(x => x.Content,
+                        new { @id = "question-content", @class = "form-control", @rows = "5", @placeholder = "Answer this question..." })
+                </div>
+                <input type="submit" class="btn btn-primary" value="Post" />
+            </div>
+            }
+    </div>
 }
-

@@ -237,3 +237,31 @@ p.user-name {
     margin-top: 5%;
     word-wrap: break-word;
 }
+
+.all-comments, .comment {
+    top: 25%;
+    padding-right: 5%;
+}
+
+.answer-info {
+    position: relative;
+}
+
+.comments-section {
+    left: 10%;
+    width: 50%;
+    display: block;
+    position:absolute;
+}
+
+.loaded-comments {
+    display: none;
+}
+
+input[type=submit].btn {
+    float: left;
+}
+
+#post{
+    display: none;
+}

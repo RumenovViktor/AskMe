@@ -396,6 +396,7 @@ namespace ForumSystem.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 

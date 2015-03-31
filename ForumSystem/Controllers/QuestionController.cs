@@ -99,5 +99,16 @@
 
             return RedirectToAction("Index", new { id = questionId });
         }
+
+        /// <summary>
+        /// Posts a comment to a given answer.
+        /// </summary>
+        /// <param name="comment">Comment view model</param>
+        /// <returns>Return the view with the added comment.</returns>
+        [HttpPost]
+        public ActionResult PostComment(CommentViewModel comment)
+        {
+            return null;
+        }
     }
 }

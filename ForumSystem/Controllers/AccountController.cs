@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ForumSystem.Models;
+using ForumSystem.Data.Repositories;
 
 namespace ForumSystem.Controllers
 {
@@ -17,10 +18,11 @@ namespace ForumSystem.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IRepository<User> users;
 
         public AccountController()
         {
-
+            this.users = new Repository<User>();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -59,6 +61,7 @@ namespace ForumSystem.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+
             return View();
         }
 
@@ -450,6 +453,7 @@ namespace ForumSystem.Controllers
             {
                 return Redirect(returnUrl);
             }
+
             return RedirectToAction("Index", "Home");
         }
 

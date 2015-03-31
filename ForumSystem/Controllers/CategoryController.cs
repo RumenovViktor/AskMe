@@ -77,7 +77,7 @@
                 TempData["CategoryId"] = id; // Change the categoryId if the user goes into another category.
             }
 
-            ViewBag.CurrentUser = GetUserById(User.Identity.GetUserId());
+            Session["CurrentUser"] = GetUserById(User.Identity.GetUserId());
             var categoryById = GetCategoryById(id, categories);
 
             // Select all the questions in the current directory

@@ -1,5 +1,9 @@
 ﻿@model ForumSystem.Models.AnswerViewModel
 
+@{
+    var currentUser = (ForumSystem.Models.User)Session["CurrentUser"];
+}
+
 <h1 id="title">@ViewBag.Title</h1>
 @if (User.Identity.IsAuthenticated)
 {
@@ -9,7 +13,7 @@
         @Html.ValidationSummary(true)
 
         <div class="image-holder image-holder-answer">
-            @if (ViewBag.CurrentUser.Image == null)
+            @if (currentUser.Image == null)
             {
                 <img src="~/fonts/no_user_photo.png" />
             }

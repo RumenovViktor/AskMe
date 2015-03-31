@@ -93,7 +93,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult PostAnswer(AnswerViewModel newAnswer) 
         {
-            int questionId = (int)TempData.Values.ElementAt(0);
+            int questionId = (int)TempData.Values.ElementAt(1);
 
             IRepository<Question> questions = new Repository<Question>();
             var questionById = GetQuestionById(questionId, questions);

@@ -1,0 +1,11 @@
+﻿@model ForumSystem.Models.CommentViewModel
+
+@using (Html.BeginForm("PostComment", "Question", FormMethod.Post))
+{
+    @Html.TextBoxFor(x => x.CommentContent);
+    @Model.AnswerId
+    @Html.Hidden("answerId", Model.AnswerId)
+    <input type="submit" class="btn btn-default" value="Post" />
+}
+
+

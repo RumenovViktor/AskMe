@@ -4,10 +4,13 @@
     var currentUser = (ForumSystem.Models.User)Session["CurrentUser"];
 }
 
-<h1 id="title">@ViewBag.Title</h1>
-<input type="submit" id="open-post-form" class="btn" value="Answer"/>
+<h1 id="title">@ViewBag.CurrentQuestion.Title</h1>
+<p class="text-left">@ViewBag.CurrentQuestion.QuestionContent</p>
 @if (User.Identity.IsAuthenticated)
 {
+    <br />
+    <input type="submit" id="open-post-form" class="btn" value="Answer" />
+    
     <div id="post">
         @using (Html.BeginForm("PostAnswer", "Question", FormMethod.Post))
         {

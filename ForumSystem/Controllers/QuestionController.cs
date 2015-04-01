@@ -13,6 +13,7 @@
 
     public class QuestionController : Controller
     {
+        [NonAction]
         public Question GetQuestionById(int? id, IRepository<Question> questions)
         {
             var questionById = questions
@@ -54,11 +55,9 @@
             IRepository<Question> questions = new Repository<Question>();
 
             var questionById = GetQuestionById(id, questions);
-            ViewBag.Title = questionById.Title;
+            ViewBag.CurrentQuestion = questionById;
 
-            IList<Answer> allAnswers = new List<Answer>();
-            allAnswers = questionById.Answers.ToList<Answer>();
-
+            IList<Answer> allAnswers = questionById.Answers.ToList<Answer>();
             IList<AnswerViewModel> answersToBePosted = new List<AnswerViewModel>();
 
             for (int i = 0; i < allAnswers.Count; i++)
@@ -106,9 +105,28 @@
         /// <param name="comment">Comment view model</param>
         /// <returns>Return the view with the added comment.</returns>
         [HttpPost]
-        public ActionResult PostComment(CommentViewModel comment)
+        public ActionResult PostComment(CommentViewModel comment, int answerId)
         {
-            return null;
+            IRepository<Comment> comments = new Repository<Comment>();
+            int questionId = (int)TempData.Values.ElementAt(1);
+
+            if (ModelState.IsValid)
+            {
+                var newComment = new Comment
+                {
+                    CommentContent = comment.CommentContent,
+                    Answer = comment.Answer,
+                    AnswerId = answerId,
+                    PostDate = DateTime.Now,
+                    UserId = User.Identity.GetUserId(),
+                };
+
+                comments.Add(newComment);
+                comments.SaveChanges();
+            }
+
+
+            return RedirectToAction("Index", new { id = questionId });
         }
     }
 }

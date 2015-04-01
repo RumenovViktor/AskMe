@@ -250,6 +250,7 @@
     <Content Include="Views\Category\_PostPartial.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Question\_PostAnswerPartial.cshtml" />
+    <Content Include="Views\Question\_PostCommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

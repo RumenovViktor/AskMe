@@ -39,7 +39,7 @@ li:hover {
     text-decoration: none;
 }
 
-.question-name{
+.question-name, .comment{
     cursor: pointer;
 }
 
@@ -262,6 +262,21 @@ input[type=submit].btn {
     float: left;
 }
 
-#post{
+#post, .comment-form{
     display: none;
+}
+
+.form-post-comment {
+    margin-top: 2%;
+}
+
+.comment-form {
+    border-top: 1px solid #ccc;
+}
+.comment-txt-area {
+    resize: none;
+}
+
+.post-comment-btn {
+    padding-bottom: 3%;
 }

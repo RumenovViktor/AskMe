@@ -1,11 +1,16 @@
 ﻿@model ForumSystem.Models.CommentViewModel
 
-@using (Html.BeginForm("PostComment", "Question", FormMethod.Post))
-{
-    @Html.TextBoxFor(x => x.CommentContent);
-    @Model.AnswerId
-    @Html.Hidden("answerId", Model.AnswerId)
-    <input type="submit" class="btn btn-default" value="Post" />
-}
-
-
+<div class="form-group">
+    @using (Html.BeginForm("PostComment", "Question", FormMethod.Post))
+    {
+        <div class="form-group form-post-comment form-control-static">
+            <div class="form-group">
+                @Html.TextAreaFor(x => x.CommentContent, new { @class = "form-control comment-txt-area" })
+                @Html.Hidden("answerId", Model.AnswerId)
+            </div>
+            <div class="post-comment-btn">
+                <input type="submit" class="btn btn-default" value="Post" />
+            </div>
+        </div>
+    }
+</div>

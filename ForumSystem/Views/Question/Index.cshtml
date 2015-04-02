@@ -28,7 +28,8 @@
                     <div class="answer-info">
                         <div class="comments-section">
                             <a class="all-comments" href="#">@Model[i].Comments.Count Comments</a> <!--TODO: Load all comments. -->
-                            <a class="comment">Say something</a> <!--TODO: Open a form for adding a new comment. -->
+                            <a class="comment @(i + "commentNo")">Say something</a> <!-- TODO: Open a form for adding a new comment. -->
+                            
                         </div>
                         <ul class="date-time answer-time">
                             <li class="day time">@Model[i].PostDate.Day<span>/</span></li>
@@ -38,9 +39,7 @@
                             <li class="minutes time">@Model[i].PostDate.Minute</li>
                         </ul>
                     </div>
-                    <div>
-                        @Html.Partial("_PostCommentPartial", new ForumSystem.Models.CommentViewModel{ AnswerId = Model[i].AnswerId })
-                    </div>
+                    
                     <div class="loaded-comments">
                         @foreach (var comment in Model[i].Comments)
                         {
@@ -65,6 +64,10 @@
                             </div>
                         }
                     </div>
+                    <div class="comment-form @(i + "commentNo")">
+                        @Html.Partial("_PostCommentPartial", new ForumSystem.Models.CommentViewModel { AnswerId = Model[i].AnswerId })
+                    </div>
+
                 </li>
             }
         </ul>

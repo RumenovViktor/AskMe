@@ -13,8 +13,21 @@
 
     public class QuestionController : Controller
     {
+        private IRepository<Question> questions;
+
+        //Poor man's DI. TODO: Use Ninject instead!!!
+        public QuestionController()
+            :this(new Repository<Question>())
+        { 
+        }
+
+        public QuestionController(IRepository<Question> questions)
+        {
+            this.questions = questions;
+        }
+
         [NonAction]
-        public Question GetQuestionById(int? id, IRepository<Question> questions)
+        public Question GetQuestionById(int? id/*, /*IRepository<Question> questions*/)
         {
             var questionById = questions
                 .All()
@@ -52,9 +65,9 @@
                 TempData["QuestionId"] = id;
             }
 
-            IRepository<Question> questions = new Repository<Question>();
+            //IRepository<Question> questions = new Repository<Question>();
 
-            var questionById = GetQuestionById(id, questions);
+            var questionById = GetQuestionById(id/*, questions*/);
             ViewBag.CurrentQuestion = questionById;
 
             IList<Answer> allAnswers = questionById.Answers.ToList<Answer>();
@@ -77,7 +90,7 @@
             int questionId = (int)TempData.Values.ElementAt(1);
 
             IRepository<Question> questions = new Repository<Question>();
-            var questionById = GetQuestionById(questionId, questions);
+            var questionById = GetQuestionById(questionId/*, questions*/);
             string userId = User.Identity.GetUserId();
 
             if (ModelState.IsValid)
@@ -95,36 +108,6 @@
                 questionById.Answers.Add(answerToBePosted);
                 questions.SaveChanges();
             }
-
-            return RedirectToAction("Index", new { id = questionId });
-        }
-
-        /// <summary>
-        /// Posts a comment to a given answer.
-        /// </summary>
-        /// <param name="comment">Comment view model</param>
-        /// <returns>Return the view with the added comment.</returns>
-        [HttpPost]
-        public ActionResult PostComment(CommentViewModel comment, int answerId)
-        {
-            IRepository<Comment> comments = new Repository<Comment>();
-            int questionId = (int)TempData.Values.ElementAt(1);
-
-            if (ModelState.IsValid)
-            {
-                var newComment = new Comment
-                {
-                    CommentContent = comment.CommentContent,
-                    Answer = comment.Answer,
-                    AnswerId = answerId,
-                    PostDate = DateTime.Now,
-                    UserId = User.Identity.GetUserId(),
-                };
-
-                comments.Add(newComment);
-                comments.SaveChanges();
-            }
-
 
             return RedirectToAction("Index", new { id = questionId });
         }

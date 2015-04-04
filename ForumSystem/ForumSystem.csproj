@@ -170,6 +170,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
@@ -250,7 +251,8 @@
     <Content Include="Views\Category\_PostPartial.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Question\_PostAnswerPartial.cshtml" />
-    <Content Include="Views\Question\_PostCommentPartial.cshtml" />
+    <Content Include="Views\Comment\_PostCommentPartial.cshtml" />
+    <Content Include="Views\Comment\_CommentsOfAnswerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

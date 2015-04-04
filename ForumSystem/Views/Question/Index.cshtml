@@ -27,9 +27,8 @@
                     </div>
                     <div class="answer-info">
                         <div class="comments-section">
-                            <a class="all-comments" href="#">@Model[i].Comments.Count Comments</a> <!--TODO: Load all comments. -->
-                            <a class="comment @(i + "commentNo")">Say something</a> <!-- TODO: Open a form for adding a new comment. -->
-                            
+                            <a id="@Model[i].AnswerId" class="all-comments">@Model[i].Comments.Count</a> <!--TODO: Load all comments. -->
+                            <a class="comment @(i + "commentNo")">Say something</a>
                         </div>
                         <ul class="date-time answer-time">
                             <li class="day time">@Model[i].PostDate.Day<span>/</span></li>
@@ -40,32 +39,11 @@
                         </ul>
                     </div>
                     
-                    <div class="loaded-comments">
-                        @foreach (var comment in Model[i].Comments)
-                        {
-                            <div class="single-comment-space">
-                                @if (comment.User.Image == null)
-                                {
-                                    <img src="~/fonts/no_user_photo.png" />
-                                }
-                                else
-                                {
-                                    // TODO: Load a picture of current user.
-                                }
-                                <p>@comment.User.UserName</p>
-                                <p>@comment.CommentContent</p>
-                                <ul class="date-time answer-time">
-                                    <li class="day time">@comment.PostDate.Day<span>/</span></li>
-                                    <li class="month time">@comment.PostDate.Month<span>/</span></li>
-                                    <li class="year time">@comment.PostDate.Year<span>|</span></li>
-                                    <li class="hour time">@comment.PostDate.Hour<span>:</span></li>
-                                    <li class="minutes time">@comment.PostDate.Minute</li>
-                                </ul>
-                            </div>
-                        }
+                    <div class="loaded-comments @Model[i].AnswerId">
+                        <!--Here are rendered all the comments for the answer.-->
                     </div>
                     <div class="comment-form @(i + "commentNo")">
-                        @Html.Partial("_PostCommentPartial", new ForumSystem.Models.CommentViewModel { AnswerId = Model[i].AnswerId })
+                        @Html.Partial("~/Views/Comment/_PostCommentPartial.cshtml", new ForumSystem.Models.CommentViewModel { AnswerId = Model[i].AnswerId })
                     </div>
 
                 </li>

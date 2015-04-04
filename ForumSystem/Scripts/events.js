@@ -36,10 +36,12 @@ $('.all-comments').click(function () {
 
     $.ajax({
         url: "/Comment/GetComments",
-        data: {'answerId': answerId },
+        data: { 'answerId': answerId },
         type: 'get',
         success: function (response) {
-            $('div.' + answerId).html(response).fadeIn('fast');
+            $('div.' + answerId)
+                .html(response)
+                .fadeIn('fast');
         },
         error: function (err) {
             alert(err.responseText);

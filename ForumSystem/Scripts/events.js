@@ -22,7 +22,7 @@ function getAnswerId(elementClass) {
     return identifierClass;
 }
 
-// Showing the comment form for the wanted answer. 
+// Showing the comment form and all the comments for the wanted answer. 
 // Every answer has a link that has his own class that differs him from the other comment links.
 // The same class is set to the form container of every answer.
 // So, if link with class '0commentNo' is clicked, the form container (for the answer) with that class is shown with slideDown effect :).

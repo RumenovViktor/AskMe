@@ -1,8 +1,17 @@
 ﻿@model ForumSystem.Models.CommentViewModel
 
+@{
+    AjaxOptions options = new AjaxOptions 
+    { 
+        HttpMethod = "POST", 
+        InsertionMode = InsertionMode.Replace, 
+        UpdateTargetId = Model.AnswerId.ToString(),
+        OnSuccess = "successfulRequest"
+    };
+}
+
 <div class="form-group">
-    @using (Ajax.BeginForm("PostComment", "Comment", 
-        new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.AnswerId.ToString() }))
+    @using (Ajax.BeginForm("PostComment", "Comment", options))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -18,3 +27,9 @@
         </div>
     }
 </div>
+
+<script>
+    function successfulRequest(response) {
+        alert(response);
+    }
+</script>

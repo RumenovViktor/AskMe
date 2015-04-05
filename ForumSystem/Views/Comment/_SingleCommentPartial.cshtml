@@ -1,0 +1,17 @@
+﻿@model ForumSystem.Models.CommentViewModel
+
+@{
+    var currentUser = (ForumSystem.Models.User)Session["CurrentUser"];
+}
+
+<div class="single-comment">
+    <p>@currentUser.UserName</p>
+    <p>@Model.CommentContent</p>
+    <ul class="date-time answer-time">
+        <li class="day time">@Model.PostDate.Day<span>/</span></li>
+        <li class="month time">@Model.PostDate.Month<span>/</span></li>
+        <li class="year time">@Model.PostDate.Year<span>|</span></li>
+        <li class="hour time">@Model.PostDate.Hour<span>:</span></li>
+        <li class="minutes time">@Model.PostDate.Minute</li>
+    </ul>
+</div>

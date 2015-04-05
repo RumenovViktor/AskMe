@@ -253,6 +253,7 @@
     <Content Include="Views\Question\_PostAnswerPartial.cshtml" />
     <Content Include="Views\Comment\_PostCommentPartial.cshtml" />
     <Content Include="Views\Comment\_CommentsOfAnswerPartial.cshtml" />
+    <Content Include="Views\Comment\_SingleCommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

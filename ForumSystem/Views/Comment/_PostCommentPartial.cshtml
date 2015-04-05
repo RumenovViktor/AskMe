@@ -1,15 +1,19 @@
 ﻿@model ForumSystem.Models.CommentViewModel
 
 <div class="form-group">
-    @using (Html.BeginForm("PostComment", "Comment", FormMethod.Post))
+    @using (Ajax.BeginForm("PostComment", "Comment", 
+        new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.AnswerId.ToString() }))
     {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
         <div class="form-group form-post-comment form-control-static">
             <div class="form-group">
                 @Html.TextAreaFor(x => x.CommentContent, new { @class = "form-control comment-txt-area" })
                 @Html.Hidden("answerId", Model.AnswerId)
             </div>
             <div class="post-comment-btn">
-                <input type="submit" class="btn btn-default" value="Post" />
+                <input type="submit" class="btn btn-default create-comment" value="Post" />
             </div>
         </div>
     }

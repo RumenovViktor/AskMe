@@ -10,7 +10,7 @@
     };
 }
 
-<div class="form-group">
+<div id="@(Model.AnswerId + "Form")" class="form-group">
     @using (Ajax.BeginForm("PostComment", "Comment", options))
     {
         @Html.AntiForgeryToken()
@@ -27,9 +27,3 @@
         </div>
     }
 </div>
-
-<script>
-    function successfulRequest(response) {
-        alert(response);
-    }
-</script>

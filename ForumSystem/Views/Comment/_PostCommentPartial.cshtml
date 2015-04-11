@@ -10,6 +10,7 @@
     };
 }
 
+<!--Use data-* attributes from HTML5 to record additonal metadata - the better way.-->
 <div id="@(Model.AnswerId + "Form")" class="form-group">
     @using (Ajax.BeginForm("PostComment", "Comment", options))
     {

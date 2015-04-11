@@ -27,7 +27,8 @@
                     </div>
                     <div class="answer-info">
                         <div class="comments-section">
-                            <a class="all-comments @Model[i].AnswerId">@Model[i].Comments.Count Comments</a> <!--TODO: Load all comments. -->
+                            <!--Use data-* attributes from HTML5 to record additonal metadata - the better way.-->
+                            <a class="all-comments @Model[i].AnswerId">@Model[i].Comments.Count Comments</a>
                             <a class="comment @(i + "commentNo") @Model[i].AnswerId">Say something</a>
                         </div>
                         <ul class="date-time answer-time">
@@ -38,11 +39,13 @@
                             <li class="minutes time">@Model[i].PostDate.Minute</li>
                         </ul>
                     </div>
+                    <!--Use data-* attributes from HTML5 to record additonal metadata - the better way.-->
                     <div class="comment-form @(i + "commentNo")">
                         @Html.Partial("~/Views/Comment/_PostCommentPartial.cshtml", new ForumSystem.Models.CommentViewModel { AnswerId = Model[i].AnswerId })
                     </div>
+                    <!--Use data-* attributes from HTML5 to record additonal metadata - the better way.-->
                     <div class="loaded-comments @Model[i].AnswerId">
-                        <div id="@Model[i].AnswerId" class="new-added-comment @Model[i].AnswerId">
+                        <div id="@Model[i].AnswerId" class="new-added-comment @Model[i].AnswerId"> <!--Use data-* attributes from HTML5 to record additonal metadata - the better way.-->
                             <!--Newly added comment.-->
                         </div>
                         <!--Here are rendered all the comments for the answer.-->
